@@ -38,21 +38,34 @@
 
 :tocdepth: 1
 
-.. Please do not modify tocdepth; will be fixed when a new Sphinx theme is shipped.
-
-.. sectnum::
-
-.. TODO: Delete the note below before merging new content to the main branch.
-
-.. note::
-
-   **This technote is not yet published.**
 
    The Rubin Observatory Science/System Requirements (LPM-17/LSE-29) and System Specifications (LSE-30) define the expected delivered image quality plus a breakdown of allocations of the contributions from various subsystems.  Some aspects/contributions to the system image quality are partially controllable/mitigated while others may be simply measurable.  Here we attempt to describe the operational plan for the observatory to effectively optimize the final system in Commission and Operations.
 
-.. Add content here.
-.. Do not include the document title (it's automatically added from metadata.yaml).
+Introduction
+============
 
+Introduction to requirements, relevant elements of the system.
+
+Hardware
+========
+
+Hardware details
+
+Software
+========
+
+Software details
+
+Operational Model
+=================
+
+Description of how a typical day/night will be executed.
+
+Future Studies Needed
+=====================
+
+What is still unclear, unscoped, to be defined?
+   
 .. .. rubric:: References
 
 .. Make in-text citations with: :cite:`bibkey`.
