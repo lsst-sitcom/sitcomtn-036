@@ -46,8 +46,9 @@ Introduction
 The Rubin Observatory Science/System Requirements (LPM-17/LSE-29) and System Specifications (LSE-30) define the expected delivered image quality plus a breakdown of allocations of the contributions from various subsystems.  Some aspects/contributions to the system image quality are partially controllable/mitigated while others may be simply measurable.  Here we attempt to describe the operational plan for the observatory to effectively optimize the final system in Commission and Operations.
 
 
-Science Requirements
---------------------
+System-level Requirements
+-------------------------
+
 
 System contribution to seeing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -68,16 +69,25 @@ The OSS further breaksdown the image quality error budget contribution by subsys
 Relevant elements of the system
 -------------------------------
 
+Camera
+~~~~~~
 
-Hardware
-========
+Data Management
+~~~~~~~~~~~~~~~
 
-Hardware details.
 
-Software
-========
+Telescope and Site
+~~~~~~~~~~~~~~~~~~
 
-Software details.
+
+
+
+Image Quality Measurement
+=========================
+
+Image Quality Control
+=====================
+
 
 Operational Model
 =================
