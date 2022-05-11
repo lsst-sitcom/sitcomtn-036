@@ -72,32 +72,141 @@ Relevant elements of the system
 Camera
 ~~~~~~
 
+The Camera is mounted within the optical "tube" or the telescope, so any temperature difference between the camera surfaces from ambient will cause convection in the surrounding air which would affect image quality.  This is controlled by circulating dynalene coolant through the camera (along with air circulation fans) that can operate on a servo loop with a set point based on temperature sensors internal to the camera.  The exact sensors to servo on and the target set point can be defined/redefined by the Rubin team in order match camera skin to the nominal ambient temperature.
+
+
 Data Management
 ~~~~~~~~~~~~~~~
+
+The Data Management (DM) system provides most of the data analysis code and the platform, the Rubin Science Platform (RSP), to perform the analysis.  The image data (and some associated metadata) is accessible via a postgress database, called "the Butler".  Most other telemetry (with a few exceptions) coming from other systems on the summit is stored in a separate timestream database, called "Engineering Facility Database".
 
 
 Telescope and Site
 ~~~~~~~~~~~~~~~~~~
 
+The Telescope and Site (T&S) consists of the remaining summit subsystems including the Dome, Mirrors, Telescope Mount Assembly (TMA), and support facility building plus the auxillary telescope observatory.  There are various environmental monitoring systems as well, including a dedicated weather station, air temperature, surface temperature, humidity, pressure, sky temperature, anemometers, accelerometers, and Differential Image Motion Monitors (DIMMs) deployed accross the summit site.  This system of components is collectively called the Environmental Awareness System (EAS) and also has control aspects to efficiently coordinate the reconfiguration of the observatory to optimize for image quality and observing efficiency.  Other relevant components of the T&S subsystem will be discussed later.
 
 
-
-Image Quality Measurement
+Image Quality Associated Measurements
 =========================
+
+Various EAS measurements are available via the EFD to link to image quality.
+
+Air Temperature
+-----------
+The thermal stratification of the air inside the dome is perhaps the most critical factor for image quality in the dome seeing environment (other than the mirror temperature differentials, which are handled internally by each mirror cell). As such, the EAS must have a large array of air temperature probes. The full 3D air temperature structure also provides a critical crosscheck measurement that the venting system is working properly. In order to constrain and evaluate the thermal enviornment inside the dome, the EAS should have air temperature probes approximately every 5 meters of elevation, 7 around the circumference of the inside of the upper enclosure surface. This translates to about 28 probes. For the lower enclosure, a coarser spatial sampling will be utilized, as three elevations of five probes (four outside the pier and one inside) to match the geometry of the HVAC system. For the AuxTel, the EAS will provide five sensors inside the dome.
+
+
+Surface Temperature
+-------------------
+
+The same type of temperature probes is utilized for surface/structural temperature. This sensing capability is necessary to verify that the major thermal masses inside the dome have reached equilibrium with the ambient environment. In addition, it is particularly critical for feedback on the Active Optics System to know the thermal state of the telescope mount in order to keep the optics properly aligned and focused. The EAS has provisioned approximately 58 additional structural probes (beyond what is provided by other subsystem components, such as the dome, TMA, M1M3, M2, and Camera) at various locations on the TMA, pier, upper and lower enclosure, and any other subsystem component determined to have a significant thermal influence on the dome environment
+
+
+Anemomters and Turbulence Monitors
+---------------------------
+
+Another critical factor in image quality is to know the amount of air turbulence inside the dome environment. The flow of air around and through the dome will also provide critical feedback measurements to verify that the dome is optimally configured for scientific operations.  The EAS should have an array of 2D anemometers placed about every 15 meters along the surface inside the upper enclosure, particularly associated with the louver vents and dome slit aperture, for a total of 18 probes.
+
+In order to disentangle the dome contribution to the image quality the EAS provides a direct measurement of the air turbulence inside the dome. This can be accomplished at specific points with 3D sonic anemometers.  An alternative to the sonic anemometer has been proposed, dubbed Dome Seeing Monitor. This apparatus is based on a design by Andrei Tokovinin, and implemented for the Dark Energy Camera on the Blanco Telescope that measures the motion of an artificial star beamed across a column of air that is directly proportional to the seeing turbulence in the air column.  The final configuration of 3D anemometers or Dome Seeing Monitors in the dome is still TBD.
+
+
+External Conditions
+-------------------
+
+The weather station supplies most of the information of the external meterological conditions on the summit.  This includes temperature, wind, wind speed, humidity, and others.  A lightning localization system is also installed next to the dome.  There is also a rain, sky temperature, and daylight sensor mounted on the DIMM tower to allow for unattended/robotic operations.  These sensors' telemetry is also available.  There is also plans for a weather forecasting service, called meteoblue, to assist in predicting evening ambient temperature, cloud coverage, and atmospheric seeing.
+
+Vibration
+---------
+
+A critical feedback measurement of the EEC/EAS is to determine how much vibration is translated into the telescope and dome structure by the downdraft system. Also accelerometer data can measure the amount of wind buffeting the TMA can withstand.  Triaxial accelerometers mounted on the M1M3, M2, and Camera Rotator.  There is also the option to temporarily install additional accelerometers on other subsystems.  The raw timestream telemetry is stored in the large file annex section of the EFD, while a condensed summary, in an accumulated time window, is available via normal EFD database query.
+
+
+DIMM and Direct Imaging
+-----------------------
+
+The ultimate feedback on the performance of the system is the delivered image quality of the science data. Other supplemental measurements of the image quality include the DIMMs (permanent and portable), and AuxTel.
+
 
 Image Quality Control
 =====================
+
+The EAS is the central coordination between the various components of the observatory in order to configure it in real-time based on the environmental conditions.
+
+Temperature Set Points
+----------------------
+
+All major thermal heat sources in the dome shall be enclosed and actively cooled via either ethylene-glycol or dynalene.  The temperature target set points can be adjusted (individually) by the EAS to minimize air turbulence from convection off of hot surfaces.
+
+
+Dome Louvers
+------------
+
+During nighttime observing, the primary control of airflow through the dome will be accomplished by the dome louvers.  With a given windspeed and direction along with the azimuth of the target field, each of the 34 louvers should be configured to optimize air flushing versus wind buffeting the telescope.  This is estimated via CFD models to be around a 2.5 m/s uniform flow through the vents (and main aperture dome slit).
+
+Downdraft System
+----------------
+
+In low wind conditions, air flow can be maintained with the support facility downdraft system which has a large ducted fan that pulls air down through the lower dome enclosure and exhaust through the far side of the building. 
+
+Dome Air Conditioning
+---------
+
+During daytime operations, the heating of the dome by the sun is compensated by the 4 large air handling units in the lower enclosure.  The cooled air is ducted and forced up to the top of the upper dome enclosure to mechanically displace the hot air to avoid stratefication.  Note that this requires the dome be parked in a specific orientation for the ducts to line up, otherwise the cool air will exhaust at the 7th level platform instead of at the top of the dome.
+
+
+Observation Scheduler
+--------------
+
+The feature-based scheduler drives the observations during the night in an effiecient manner.  The scheduler already includes an interface with a transparentcy map of the current sky, and has options to take other penalty/reward maps based on things like image quality, wind speed/direction, or other derived parameters.  These optional maps are to be defined.
+
+
+Auxillary Telescope
+------------
+
+The auxillary telescope includes many aspects of the main telescope, and can be used as a testbed for experimental development and validation of algorithms.  It has a similar downdraft system (circulation fans) and a suite of EAS sensors.
 
 
 Operational Model
 =================
 
+
 Description of how a typical day/night will be executed.
+
+Daytime
+-------
+
+The main operational mode for daytime is to condition the air inside the dome to reach the predicted ambient air temperature at the beginning of evening observations.  Deviations to that plan may come from daytime maintenance/engineering activities within the dome or of the HVAC system itself.  It is expected that normally the system can reach the target temperature in most situations, but it may be worthwhile to study what is the best course of action if the target temperature is not expected to be reached on a given day.  Possible options would be to open the dome early to expell hot air, additional pre-cooling (via lower set point) of the large themal masses, and/or operate the downdraft system to aid in flushing hot air.
+
+Nighttime
+--------
+
+Three modes are envisioned based on wind speed/external condtions
+
+Mode 1: Dome is fully closed at night due to bad weather or other causes; downdraft system is OFF.  HVAC maintains a target temperature of around the external ambient temperature (unless condensation is a risk) in case conditions improve.
+
+Mode 2: Low wind: Dome louvers are all fully opened and downdraft system is ON. This mode will typically be selected when telescope is pointing directly into the wind, opposite to the wind, or the wind speed inside the dome is low.  Auxtel circulation fans set to appropriate speed.
+
+Mode 3: High wind:  Same as Mode 2, but Downdraft system is OFF and Dome louvers on the upwind side are partially closed to reduce telescope windshake, or the wind speed inside the dome is too strong.  Scheduler may penalize observations directly into wind.  Auxtel circulation fans set to OFF, vents CLOSED.
+
+
+
+
 
 Future Studies Needed
 =====================
 
 What is still unclear, unscoped, to be defined?
+
+Investigation 1:  Measure dome seeing vs wind flushing, what is the optimum inside wind speed?  We can measure turbulence with sonic anemometers (or possibly other sensors?) in auxtel (and main telescope soon).
+
+Investigation 2:  What is the nominal ambient temperature inside the dome?  Are there possible adjustments of set points to be done to make all surfaces as uniform as possible?  Auxtel doesn't have much control over this, so may have to wait to do this until system are installed in the main dome.
+
+Investigation 3:  What do we do if evening temperature cannot be reached during the day?  
+
+Investigation 4:  Impact of image quality vs windspeed/direction/louver configuration.  When do we close the louvers, start the downdraft, or avoid observing into wind?  What should be the penalty for observing close to the wind?  Can test this somewhat with auxtel (although no louvers).
+
+
    
 .. .. rubric:: References
 
