@@ -63,7 +63,7 @@ The spatial profile defines the shape of the point spread function (a double Gau
 Subsystem allocations
 ~~~~~~~~~~~~~~~~~~~~~
 
-The OSS further breaksdown the image quality error budget contribution by subsystem.  The Camera cannot exceed a contribtion of 0.3 arcseconds, while the Telescope (and other parts of the observatory) is allocated 0.25 error contribution.  This flows down further into individual subsystems and is recorded in the image quality error budget (link/reference?).
+The OSS further breaksdown the image quality error budget contribution by subsystem.  The Camera cannot exceed a contribtion of 0.3 arcseconds, while the Telescope (and other parts of the observatory) is allocated 0.25 error contribution.  This flows down further into individual subsystems and is recorded in the image quality error budget (`LTS-124 <http://ls.st/lts-124>`).
 
 
 Relevant elements of the system
@@ -92,18 +92,18 @@ Image Quality Associated Measurements
 
 Various EAS measurements are available via the EFD to link to image quality.
 
-Air Temperature
+Air Temperature: ESS CSC, ~48 planned for MT, 5 for AT.  Product Owner Brian Stalder
 -----------
 The thermal stratification of the air inside the dome is perhaps the most critical factor for image quality in the dome seeing environment (other than the mirror temperature differentials, which are handled internally by each mirror cell). As such, the EAS must have a large array of air temperature probes. The full 3D air temperature structure also provides a critical crosscheck measurement that the venting system is working properly. In order to constrain and evaluate the thermal enviornment inside the dome, the EAS should have air temperature probes approximately every 5 meters of elevation, 7 around the circumference of the inside of the upper enclosure surface. This translates to about 28 probes. For the lower enclosure, a coarser spatial sampling will be utilized, as three elevations of five probes (four outside the pier and one inside) to match the geometry of the HVAC system. For the AuxTel, the EAS will provide five sensors inside the dome.
 
 
-Surface Temperature
+Surface Temperature: ESS CSC. ~58 planned for MT, 5 for AT.  Product Owner Brian Stalder
 -------------------
 
 The same type of temperature probes is utilized for surface/structural temperature. This sensing capability is necessary to verify that the major thermal masses inside the dome have reached equilibrium with the ambient environment. In addition, it is particularly critical for feedback on the Active Optics System to know the thermal state of the telescope mount in order to keep the optics properly aligned and focused. The EAS has provisioned approximately 58 additional structural probes (beyond what is provided by other subsystem components, such as the dome, TMA, M1M3, M2, and Camera) at various locations on the TMA, pier, upper and lower enclosure, and any other subsystem component determined to have a significant thermal influence on the dome environment
 
 
-Anemomters and Turbulence Monitors
+Anemomters and Turbulence Monitors: ESS CSC, 12 planned for MT, 1 for AT. Product Owner Brian Stalder
 ---------------------------
 
 Another critical factor in image quality is to know the amount of air turbulence inside the dome environment. The flow of air around and through the dome will also provide critical feedback measurements to verify that the dome is optimally configured for scientific operations.  The EAS should have an array of 2D anemometers placed about every 15 meters along the surface inside the upper enclosure, particularly associated with the louver vents and dome slit aperture, for a total of 18 probes.
@@ -111,60 +111,89 @@ Another critical factor in image quality is to know the amount of air turbulence
 In order to disentangle the dome contribution to the image quality the EAS provides a direct measurement of the air turbulence inside the dome. This can be accomplished at specific points with 3D sonic anemometers.  An alternative to the sonic anemometer has been proposed, dubbed Dome Seeing Monitor. This apparatus is based on a design by Andrei Tokovinin, and implemented for the Dark Energy Camera on the Blanco Telescope that measures the motion of an artificial star beamed across a column of air that is directly proportional to the seeing turbulence in the air column.  The final configuration of 3D anemometers or Dome Seeing Monitors in the dome is still TBD.
 
 
-External Conditions
+External Conditions: Various CSCs, 1 on Calibration Hill, Product Owner Brian Stalder
 -------------------
 
 The weather station supplies most of the information of the external meterological conditions on the summit.  This includes temperature, wind, wind speed, humidity, and others.  A lightning localization system is also installed next to the dome.  There is also a rain, sky temperature, and daylight sensor mounted on the DIMM tower to allow for unattended/robotic operations.  These sensors' telemetry is also available.  There is also plans for a weather forecasting service, called meteoblue, to assist in predicting evening ambient temperature, cloud coverage, and atmospheric seeing.
 
-Vibration
+Vibration: VMS CSC, 3 for MT (M1M3, M2, Camera), 1 for AT (truss).  Product Owner Doug Neill
 ---------
 
 A critical feedback measurement of the EEC/EAS is to determine how much vibration is translated into the telescope and dome structure by the downdraft system. Also accelerometer data can measure the amount of wind buffeting the TMA can withstand.  Triaxial accelerometers mounted on the M1M3, M2, and Camera Rotator.  There is also the option to temporarily install additional accelerometers on other subsystems.  The raw timestream telemetry is stored in the large file annex section of the EFD, while a condensed summary, in an accumulated time window, is available via normal EFD database query.
 
 
-DIMM and Direct Imaging
+DIMM and Direct Imaging: DIMM CSC, 1 on Calibration Hill, 1 is portable, Product Owner Brian Stalder
 -----------------------
 
 The ultimate feedback on the performance of the system is the delivered image quality of the science data. Other supplemental measurements of the image quality include the DIMMs (permanent and portable), and AuxTel.
 
 
-Image Quality Control
+Image Quality Available Control Aspects
 =====================
 
 The EAS is the central coordination between the various components of the observatory in order to configure it in real-time based on the environmental conditions.
 
-Temperature Set Points
+Temperature Set Points: Various CSCs including MTMount, MTDome, EEC, M1M3, MTCamera.
 ----------------------
 
 All major thermal heat sources in the dome shall be enclosed and actively cooled via either ethylene-glycol or dynalene.  The temperature target set points can be adjusted (individually) by the EAS to minimize air turbulence from convection off of hot surfaces.
 
 
-Dome Louvers
+Dome Louvers: MTDome CSC.
 ------------
 
 During nighttime observing, the primary control of airflow through the dome will be accomplished by the dome louvers.  With a given windspeed and direction along with the azimuth of the target field, each of the 34 louvers should be configured to optimize air flushing versus wind buffeting the telescope.  This is estimated via CFD models to be around a 2.5 m/s uniform flow through the vents (and main aperture dome slit).
 
-Downdraft System
+Downdraft System: EEC CSC.
 ----------------
 
 In low wind conditions, air flow can be maintained with the support facility downdraft system which has a large ducted fan that pulls air down through the lower dome enclosure and exhaust through the far side of the building. 
 
-Dome Air Conditioning
+Dome Air Conditioning: EEC CSC.
 ---------
 
 During daytime operations, the heating of the dome by the sun is compensated by the 4 large air handling units in the lower enclosure.  The cooled air is ducted and forced up to the top of the upper dome enclosure to mechanically displace the hot air to avoid stratefication.  Note that this requires the dome be parked in a specific orientation for the ducts to line up, otherwise the cool air will exhaust at the 7th level platform instead of at the top of the dome.
 
 
-Observation Scheduler
+Observation Scheduler: MTScheduler.
 --------------
 
 The feature-based scheduler drives the observations during the night in an effiecient manner.  The scheduler already includes an interface with a transparentcy map of the current sky, and has options to take other penalty/reward maps based on things like image quality, wind speed/direction, or other derived parameters.  These optional maps are to be defined.
 
 
-Auxillary Telescope
+Auxillary Telescope: Various CSCs.
 ------------
 
 The auxillary telescope includes many aspects of the main telescope, and can be used as a testbed for experimental development and validation of algorithms.  It has a similar downdraft system (circulation fans) and a suite of EAS sensors.
+
+
+Instrumentation
+===============
+
+As part of the EAS, a variety of sensors are in developement to provide situational information on the current state of the observatory.  These are summarized in the following table.
+
+.. csv-table:: List of Sensors
+	       :header: "Sensor Type", "# deployed", "# planned", "Model", "Product Owner", "Lead Dev", "CSC", "Notes"
+			"Thermocouple","?","?","?","Stalder","Owen","ESS","M1M3, TMA, and Dome Deployment"
+			"RTD","?","?","?","Stalder","Owen","ESS","Hexapods, Rotator, M2"
+			"Accelerometers","3","4","?","?","Kubernek","VMS","TMA, M1M3, M2, Camera (rotator), 1 labjack prototype on AuxTel"
+			"bi-axial anemometer","1","40","WINDSONIC1-L10-PW","Stalder","Owen","ESS","one on each of the louver banks, aperture shutter"
+			"tri-axial anemometer","1","?","CSAT3B-NC","Stalder","Owen","ESS","unknown number/locations around the dome for turbulence"
+			"DIMM","2","2","Astelco 12-inch","Stalder","Owen","DIMM","one permanently on calibration hill, one portable on tripod"
+
+
+Other seeing sensors
+--------------------
+
+There are other sensors in prototyping and evaluation stages that are relevant to image quality.  Currently there are sensors deployed at AuxTel, by the Harvard IQ team and do not have any associated CSC with them with the possibile exception of those with a labjack-based readout.:
+
+* Gill Instruments tri-axis device, model 1590, readout by a labjack
+* Local seeing "strobed DIMM" prototype
+* High-resolution differential temperature sensors
+* Shack-Hartmann Camera on AuxTel Nasmyth
+
+Plus there are two copies of a spot-motion monitor, invented by A. Tokovinin, but development on this has stalled after the first deployment due to Covid restrictions to the summit.
+
 
 
 Operational Model
