@@ -63,7 +63,9 @@ The spatial profile defines the shape of the point spread function (a double Gau
 Subsystem allocations
 ~~~~~~~~~~~~~~~~~~~~~
 
-The OSS further breaksdown the image quality error budget contribution by subsystem.  The Camera cannot exceed a contribtion of 0.3 arcseconds, while the Telescope (and other parts of the observatory) is allocated 0.25 error contribution.  This flows down further into individual subsystems and is recorded in the image quality error budget (`LTS-124 <http://ls.st/lts-124>`).
+The OSS further breaksdown the image quality error budget contribution by subsystem.  The Camera cannot exceed a contribtion of 0.3 arcseconds, while the Telescope (and other parts of the observatory) is allocated 0.25 error contribution.  This flows down further into individual subsystems and is recorded in the image quality error budget (`LTS-124`_).
+
+.. _LTS-124: http://ls.st/lts-124
 
 
 Relevant elements of the system
